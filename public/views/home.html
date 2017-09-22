@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Bluestacks Recruitment</h1>
+        <p>Comment Widget</p>
+    </div>
+
+    <div>
+        Logged in as <span class="user"> {{user.name}}</span>
+    </div>
+    <br>
+
+    <div class="form-group">
+        <label for="usr">New comment:</label>
+        <div class="row">
+            <div class="col-md-11">
+                <input type="text" class="form-control" id="cmt" ng-model="data.cmt">
+            </div>
+            <button type="button" class="btn btn-primary col-md-1" ng-click="addComment(data.cmt)">Add</button>
+        </div>
+    </div>
+
+    All comments:
+    <ul ng-if="data.comments" class="list-group">
+        <div ng-repeat="comment in data.comments track by $index" class="list-group-item">
+            <div>
+
+                <div class="commentline">
+                    <span class="user">{{comment.user}}: </span>
+                    <span class="grow">{{comment.comment}}</span>
+
+                    <span>
+                            <span class="votebutton" ng-click="vote([comment.id], 1)">^</span>
+                    <span>{{comment.votes}}</span>
+                    <span class="votebutton" ng-click="vote([comment.id], -1)">v</span>
+                    </span>
+                    <span ng-click="comment.addReply = true;">Reply</span>
+                </div>
+
+
+                <!-- reply -->
+                <span ng-if="comment.addReply" class="row">
+                            <div class="col-xs-8 col-md-10">
+                                <input type="text" class="form-control" id="cmt" ng-model="comment.addReplytext">
+                            </div>
+                        <button type="button" class="btn btn-primary btn-xs col-xs-2 col-md-1" ng-click="addReply(comment.addReplytext, comment.id); comment.addReply = false;">Reply</button>
+                        <button type="button" class="btn btn-primary btn-xs col-xs-2 col-md-1" ng-click="comment.addReply = false;">Cancel</button>
+                    </span>
+                <!-- reply -->
+
+
+                <div class="childcomment commentline" ng-repeat="reply in comment.replies track by $index" ng-if="comment.replies && comment.replies.length>0">
+                    <span class="user">{{reply.user}}: </span>
+                    <span class="grow">{{reply.comment}}</span>
+
+                    <span>
+                        <span class="votebutton" ng-click="vote([comment.id, reply.id], 1)">^</span>
+                    <span>{{reply.votes}}</span>
+                    <span class="votebutton" ng-click="vote([comment.id, reply.id], -1)">v</span>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </ul>
+
+    <style>
+        * {
+            color: grey;
+        }
+
+        .user {
+            font-weight: bold;
+        }
+
+        .childcomment {
+            margin-left: 29px;
+            border-left: 1px solid lightgrey;
+        }
+
+        .commentline {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .grow {
+            flex-grow: 1
+        }
+
+        .votebutton {
+            padding: 0px 10px;
+            font-weight: bold;
+        }
+    </style>

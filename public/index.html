@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CODE</title>
+    <link href="libs/bootstrap.min.css" rel="stylesheet">
+
+    <!-- <script type="text/javascript" charset="utf-8" src="jquery-3.2.1.js"></script> -->
+    <!-- <script type="text/javascript" charset="utf-8" src="bootstrap.min.js"></script> -->
+    <script type="text/javascript" charset="utf-8" src="libs/angular.js"></script>
+    <!-- <script type="text/javascript" charset="utf-8" src="angular-ui-router.min.js"></script> -->
+
+    <script type="text/javascript" charset="utf-8" src="app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="controllers/mainCtrl.js"></script>
+    <script type="text/javascript" charset="utf-8" src="providers/dataFactory.js"></script>
+
+</head>
+
+<body ng-app="code" ng-controller="mainCtrl">
+    <div ng-include="'views/home.html'"></div>
+</body>
+
+</html>
